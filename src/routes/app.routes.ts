@@ -7,6 +7,8 @@ import * as pricesC from '@/controllers/app/prices.controller'
 import * as ordersC from '@/controllers/app/orders.controller'
 import * as commentsC from '@/controllers/app/comments.controller'
 import * as episodesC from '@/controllers/app/episodes.controller'
+import * as categoriesC from '@/controllers/app/categories.controller'
+import * as lessonsC from '@/controllers/app/lessons.controller'
 
 export const route = Router()
 
@@ -22,7 +24,7 @@ route.put('/account/avatar', auth(), accountC.updateAvatar)
 route.post('/account/pusher', auth(), accountC.pusherLogin)
 
 route.get('/activities', auth(), activitiesC.getActivities)
-route.post('/activities/:episodeId', auth(), activitiesC.createActivity)
+route.post('/activities/:lessonId/:episodeId', auth(), activitiesC.createActivity)
 
 route.get('/prices', pricesC.getPrices)
 route.get('/prices/:slug', pricesC.getPrice)
@@ -40,6 +42,12 @@ route.post('/replies/:commentId', auth(), commentsC.createReply)
 route.delete('/replies/:replyId', auth(), commentsC.deleteReply)
 
 route.get('/episodes/:episodeId/url', auth({ required: false }), episodesC.getEpisodeUrl)
+
+route.get('/categories', categoriesC.getCategories)
+route.get('/categories/:slug', categoriesC.getCategory)
+
+route.get('/lessons', lessonsC.getLessons)
+route.get('/lessons/:slug', lessonsC.getLesson)
 
 export default function initAppRoutes(app: Application) {
   app.use(route)

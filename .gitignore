@@ -1,5 +1,5 @@
-/dist
-/*config.js
+dist
+uploads
 node_modules
 *.log
 logs
